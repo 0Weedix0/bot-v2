@@ -1,3 +1,4 @@
+const sequelize = require('sequelize')
 const {
   Client,
   GatewayIntentBits,

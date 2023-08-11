@@ -1,10 +1,11 @@
-const { Schema, model } = require("mongoose");
+const { DataTypes } = require('sequelize');
+const sequelize = require('../database');
 
-let warningSchema = new Schema({
+const warning = sequelize.define('warning', {
     GuildID: String,
     UserID: String,
     UserTag: String,
     Content: Array
 });
 
-module.exports = model("WarningSchema", warningSchema);
+module.exports = warning;

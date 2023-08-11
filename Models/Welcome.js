@@ -1,10 +1,12 @@
-const {model, Schema} = require('mongoose');
+const { DataTypes } = require('sequelize');
+const sequelize = require('../database');
 
-let welcomeSchema = new Schema({
-    Guild: String,
+const Welcome = sequelize.define('Welcome', {
+  Guild: String,
     Channel: String,
     Msg: String,
     Role: String
 });
 
-module.exports = model("Welcome", welcomeSchema);
+module.exports = Welcome
+// ("Welcome", welcomeSchema);
