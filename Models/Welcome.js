@@ -17,7 +17,7 @@ db.run(`
 const getWelcome = (guildID) => {
 
   return new Promise((resolve, reject) => {
-    db.get('SELECT * FROM welcomes guildID = ?', [guildID], (err, row) => {
+     db.get('SELECT * FROM welcomes WHERE guildID = ?', [guildID], (err, row) => {
       if (err) {
         reject(err);
         return;
@@ -37,6 +37,7 @@ const setWelcome = (guildID, channelID, message, roleID, rulesID) => {
       [guildID, channelID, message, roleID, rulesID], 
     (err) => {
       if (err) {
+        console.log("it's ok")
         reject(err);
         return;
       }
@@ -54,6 +55,7 @@ const reset1 = (guildID, channelID, message, roleID, rulesID) => {
     [guildID, channelID, message, roleID, rulesID],
     (err) => {
     if (err) {
+      console.log("it's fine")
       reject(err);
       return;
     }
@@ -63,10 +65,10 @@ const reset1 = (guildID, channelID, message, roleID, rulesID) => {
 }
 
 // Fermer la connexion 
-// process.on('SIGINT', () => {
-//   db.close();
-//   process.exit();
-// });
+process.on('SIGINT', () => {
+  db.close();
+  process.exit();
+});
 
 module.exports = {
   getWelcome,

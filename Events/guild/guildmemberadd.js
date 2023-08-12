@@ -8,7 +8,7 @@ module.exports = {
 
     async execute(member, Client) {
         const data = await sq.getWelcome({
-            guild: member.guild.id
+            guildId: member.guild.id
         });
         if (!data) {return console.log('pas de welcome present')}
 
