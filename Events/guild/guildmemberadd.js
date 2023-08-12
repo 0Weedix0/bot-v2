@@ -1,16 +1,16 @@
-const { SlashCommandBuilder, EmbedBuilder, AttachmentBuilder } = require('discord.js')
+const { SlashCommandBuilder, EmbedBuilder, AttachmentBuilder, Client } = require('discord.js')
 const Canvas = require('canvas')
-const sqlite = require('../../database')
-const Welcome = require('../../Models/Welcome');
+const sq  = require('../../Models/Welcome');
+// const { getWelcome} = require('../../database')
 
 module.exports = {
     name: 'guildMemberAdd',
 
-    async execute(member, client) {
-        const data = await sqlite.getWelcome({
-            Guild: member.guild.id
-        })
-        if (!data) return
+    async execute(member, Client) {
+        const data = await sq.getWelcome({
+            guild: member.guild.id
+        });
+        if (!data) {return console.log('pas de welcome present')}
 
         const canvas = Canvas.createCanvas(1024, 500) // Create Canvas
         const ctx = canvas.getContext('2d')
@@ -65,7 +65,7 @@ module.exports = {
         }) // Sending Image As Attachment
 
         const channel = member.guild.channels.cache.get(data.Channel)
-        if (!channel) return
+        if (!channel) {return console.log('Channel not found');}
         let message = data.Message
         if (!message || message === null) message = `Welcome To ${member.guild.name}`
         let rule = data.Rule

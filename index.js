@@ -11,11 +11,11 @@ const { loadCommands } = require("./Handlers/commandHandler");
 
 const client = new Client({
   intents: [Object.keys(GatewayIntentBits)],
-  partials: [Object.keys(Partials)],
+  partials: [Object.keys(2097152)],
 });
 
 client.on("unhandledRejection", (reason, p) => {
-  const ChannelID = "1061924092346904657";
+  const ChannelID = "1139607479609741503";
   console.error("Unhandled promise rejection:", reason, p);
   const Embed = new EmbedBuilder()
     .setColor("#235ee7")

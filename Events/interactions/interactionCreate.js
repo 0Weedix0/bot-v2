@@ -50,13 +50,13 @@ module.exports = {
       //moderation filter
       if (command.moderatorOnly) {
         if (
-          !member.roles.cache.has("1032785824686817300") ||
-          !member.roles.cache.has("1032785824686817297") ||
-          !member.roles.cache.has("1032785824724570122") ||
-          !member.roles.cache.has("1032785824724570123")
+          !member.roles.cache.has("1137382511278825552") ||
+          !member.roles.cache.has("1139635170333446178") ||
+          !member.roles.cache.has("1139632724542488577") ||
+          !member.roles.cache.has("1137382511278825552")
         ) {
           errEmbed.setDescription(
-            "⛔ | Whoops! You don't have permissions for that!"
+            "⛔ | Whoops! You don't have permissions for that1!"
           );
           return interaction.reply({ embeds: [errEmbed], ephemeral: true });
         }
@@ -65,9 +65,9 @@ module.exports = {
       //admin filter
       if (command.adminOnly) {
         if (
-          !member.roles.cache.has("1032785824724570123") ||
-          !member.roles.cache.has("1032785824686817297") ||
-          !member.roles.cache.has("1032785824724570122")
+          !member.roles.cache.has("1137382511278825552") ||
+          !member.roles.cache.has("1139635170333446178") ||
+          !member.roles.cache.has("1139632724542488577")
         ) {
           errEmbed.setDescription(
             "⛔ | Whoops! You don't have permissions for that!"

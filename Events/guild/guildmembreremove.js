@@ -1,5 +1,6 @@
 const { EmbedBuilder } = require("@discordjs/builders");
-const { GuildMember, WelcomeChannel } = require("discord.js");
+const { GuildMember } = require("discord.js");
+// const Welcome = require("../../Models/Welcome");
 
 
 module.exports = {
@@ -9,7 +10,7 @@ module.exports = {
    */
   execute(member) {
     const {user, guild} = member;
-    const memberLogs = member.guild.channels.cache.get('1008752273012314233');
+    const memberLogs = member.guild.channels.cache.get('1136619346945396758');
     const leaveMessage = `<@${member.id}> left! It was nice having you around.`;
     
     const leaveEmbed = new EmbedBuilder()
@@ -21,8 +22,9 @@ module.exports = {
     )
     .setThumbnail('https://cdn.discordapp.com/attachments/754370302279942356/1008371801530847293/kajdev.png')
     .setTimestamp();
-
-    WelcomeChannel.send({embeds: [leaveEmbed]});
+    
+   
+    memberLogs.send({embeds: [leaveEmbed]});
     console.log(`${member.id} left the guild.`)
   },
 };
