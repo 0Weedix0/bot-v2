@@ -5,20 +5,21 @@ const db = new sqlite3.Database('./welcomer.sqlite') ;
 // Créer la table welcomes
 db.run(`
   CREATE TABLE IF NOT EXISTS welcomes (
-    guildID TEXT, 
-    channelID TEXT,
+    guild TEXT, 
+    channel TEXT,
     message TEXT,
-    roleID TEXT,
-    rulesID TEXT
+    role TEXT,
+    rules TEXT
   )  
 `);
 
 // Récupérer les infos de bienvenue
-const getWelcome = (guildID) => {
+const getWelcome = (guild) => {
 
   return new Promise((resolve, reject) => {
-     db.get('SELECT message FROM welcomes WHERE (guildID) = ?', [guildID], (err, row) => {
+     db.get('SELECT * FROM welcomes WHERE guild = ?', [guild], (err, row) => {
       if (err) {
+        console.log("not found", err);
         reject(err);
         return;
       }
@@ -30,11 +31,11 @@ const getWelcome = (guildID) => {
 }
 
 // Définir les infos de bienvenue 
-const setWelcome = (guildID, channelID, message, roleID, rulesID) => {
+const setWelcome = (guild, channel, message, role, rules) => {
 
   return new Promise((resolve, reject) => {
-    db.run('REPLACE INTO welcomes (guildID, channelID, message, roleID, rulesID) VALUES (?, ?, ?, ?, ?)',
-      [guildID, channelID, message, roleID, rulesID], 
+    db.run('REPLACE INTO welcomes (guild, channel, message, role, rules) VALUES (?, ?, ?, ?, ?)',
+      [guild, channel, message, role, rules], 
     (err) => {
       if (err) {
         console.log("it's ok")
@@ -48,11 +49,11 @@ const setWelcome = (guildID, channelID, message, roleID, rulesID) => {
 
 }
 
-const reset1 = (guildID, channelID, message, roleID, rulesID) => {
+const reset1 = (guild, channel, message, role, rules) => {
 
   return new Promise((resolve, reject) => {
-    db.run('DELETE FROM welcomes WHERE guildID = ?', [guildID]);
-    [guildID, channelID, message, roleID, rulesID],
+    db.run('DELETE FROM welcomes WHERE guild = ?', [guild]);
+    [guild, channel, message, role, rules],
     (err) => {
     if (err) {
       console.log("it's fine")

@@ -1,17 +1,17 @@
 const { SlashCommandBuilder, EmbedBuilder, AttachmentBuilder, Client } = require('discord.js')
 const Canvas = require('canvas')
-const sq  = require('../../Models/Welcome');
-// const { getWelcome} = require('../../database')
+// const { sqlite } = require('../../database')
+const sqlite  = require('../../Models/Welcome');
 
 module.exports = {
     name: 'guildMemberAdd',
 
     async execute(member, Client) {
-        const data = await sq.getWelcome({
-            guildId: member.guild.id
-        });
+        const data = await sqlite.getWelcome({
+            guild: member.guild.id
+        })
         if (!data) {return console.log('pas de welcome present')}
-
+        
         const canvas = Canvas.createCanvas(1024, 500) // Create Canvas
         const ctx = canvas.getContext('2d')
         // const background = await Canvas.loadImage('D:/Ubaid7/Coding/JavaScript/Discord Bots/Tutorial Bots/Tutorial Bot V14/Images/welcome1.jpg') // Locate To Your Image

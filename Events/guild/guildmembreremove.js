@@ -1,6 +1,6 @@
 const { EmbedBuilder } = require("@discordjs/builders");
 const { GuildMember } = require("discord.js");
-// const Welcome = require("../../Models/Welcome");
+
 
 
 module.exports = {

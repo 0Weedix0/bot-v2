@@ -50,7 +50,8 @@ module.exports = {
                 if (rule) rule = rule.id
                 if (!rule) rule = null
 
-                await sequelize.getWelcome(
+                
+                await sequelize.setWelcome(
                     interaction.guild.id,
                     channel.id,
                     message,
