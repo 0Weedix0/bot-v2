@@ -17,7 +17,7 @@ db.run(`
 const getWelcome = (guildID) => {
 
   return new Promise((resolve, reject) => {
-     db.get('SELECT * FROM welcomes WHERE guildID = ?', [guildID], (err, row) => {
+     db.get('SELECT message FROM welcomes WHERE (guildID) = ?', [guildID], (err, row) => {
       if (err) {
         reject(err);
         return;
