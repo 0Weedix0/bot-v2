@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder, PermissionFlagsBits } = require('discord.js')
-const sequelize = require('../../Models/Welcome');
+const db = require('../../Models/Welcome');
 // const { getWelcome, setWelcome } = require('../../database');
 
 
@@ -37,7 +37,7 @@ module.exports = {
     async execute(interaction, client) {
 
         if (interaction.options.getSubcommand() === 'set') {
-            const data = await sequelize.getWelcome(interaction.guild.id);
+            const data = await db.getWelcome(interaction.guild.id);
 
             if (data) { // If Welcome System Already Enabled
                 const channel = interaction.options.getChannel('channel')
@@ -51,7 +51,7 @@ module.exports = {
                 if (!rule) rule = null
 
                 
-                await sequelize.setWelcome(
+                await db.getWelcome(
                     interaction.guild.id,
                     channel.id,
                     message,
@@ -86,7 +86,7 @@ Welcome Message: ${message}
                 if (rule) rule = rule.id
                 if (!rule) rule = null
 
-                const data = await sequelize.setWelcome(
+                const data = await db.setWelcome(
                     interaction.guild.id,
                     channel.id,
                     message,
@@ -112,7 +112,7 @@ Welcome Message: ${message}
         }
 
         if (interaction.options.getSubcommand() === 'remove') {
-            const data = sequelize.reset1(interaction.guild.id)
+            const data = db.reset1(interaction.guild.id)
 
             if (!data) {
                 await interaction.reply({ content: `Welcome System Not Setup In **${interaction.guild.name}**`, ephemeral: true })

@@ -1,7 +1,6 @@
 // sqlite-db.js
 const sqlite3 = require('sqlite3').verbose();
-const db = new sqlite3.Database('./welcomer.sqlite') ;
-
+const db = new sqlite3.Database('./database.sqlite'); ;
 // Créer la table welcomes
 db.run(`
   CREATE TABLE IF NOT EXISTS welcomes (
@@ -17,9 +16,9 @@ db.run(`
 const getWelcome = (guild) => {
 
   return new Promise((resolve, reject) => {
-     db.get('SELECT * FROM welcomes WHERE guild = ?', [guild], (err, row) => {
+    db.get('SELECT * FROM welcomes WHERE guild = ?', [guild.id], (err, row) => {
+       console.log("getwelcome");
       if (err) {
-        console.log("not found", err);
         reject(err);
         return;
       }
@@ -36,9 +35,9 @@ const setWelcome = (guild, channel, message, role, rules) => {
   return new Promise((resolve, reject) => {
     db.run('REPLACE INTO welcomes (guild, channel, message, role, rules) VALUES (?, ?, ?, ?, ?)',
       [guild, channel, message, role, rules], 
+      console.log("setwelcome"),
     (err) => {
       if (err) {
-        console.log("it's ok")
         reject(err);
         return;
       }
@@ -54,9 +53,9 @@ const reset1 = (guild, channel, message, role, rules) => {
   return new Promise((resolve, reject) => {
     db.run('DELETE FROM welcomes WHERE guild = ?', [guild]);
     [guild, channel, message, role, rules],
+    console.log("reset1"),
     (err) => {
     if (err) {
-      console.log("it's fine")
       reject(err);
       return;
     }
