@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder, PermissionFlagsBits } = require('discord.js')
-const db = require('../../Models/Welcome');
+const sqlite3 = require('../../Models/Welcome');
 // const { getWelcome, setWelcome } = require('../../database');
 
 
@@ -37,7 +37,7 @@ module.exports = {
     async execute(interaction, client) {
 
         if (interaction.options.getSubcommand() === 'set') {
-            const data = await db.getWelcome(interaction.guild.id);
+            const data = await sqlite3.getWelcome(interaction.guild.id);
 
             if (data) { // If Welcome System Already Enabled
                 const channel = interaction.options.getChannel('channel')
@@ -49,9 +49,9 @@ module.exports = {
                 let rule = interaction.options.getChannel('rule')
                 if (rule) rule = rule.id
                 if (!rule) rule = null
-
+                console.log(data)
                 
-                await db.getWelcome(
+                await sqlite3.getWelcome(
                     interaction.guild.id,
                     channel.id,
                     message,
@@ -86,7 +86,7 @@ Welcome Message: ${message}
                 if (rule) rule = rule.id
                 if (!rule) rule = null
 
-                const data = await db.setWelcome(
+                const data = await sqlite3.setWelcome(
                     interaction.guild.id,
                     channel.id,
                     message,
@@ -112,7 +112,7 @@ Welcome Message: ${message}
         }
 
         if (interaction.options.getSubcommand() === 'remove') {
-            const data = db.reset1(interaction.guild.id)
+            const data = sqlite3.reset1(interaction.guild.id)
 
             if (!data) {
                 await interaction.reply({ content: `Welcome System Not Setup In **${interaction.guild.name}**`, ephemeral: true })
