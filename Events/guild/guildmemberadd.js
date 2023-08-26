@@ -9,7 +9,7 @@ module.exports = {
        
        try {
            const data = await sqlite3.getWelcome({
-               guild: member.guild.id
+               guild: interaction.guild.id
            })
            if (!data) {return console.log('pas de welcome present')}
         

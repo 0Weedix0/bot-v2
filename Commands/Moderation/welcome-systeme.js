@@ -52,8 +52,8 @@ module.exports = {
                 console.log(data)
                 
                 await sqlite3.getWelcome(
-                    interaction.guild.id,
-                    channel.id,
+                    interaction.guild,
+                    channel,
                     message,
                     role,
                     rule
@@ -88,7 +88,7 @@ Welcome Message: ${message}
 
                 const data = await sqlite3.setWelcome(
                     interaction.guild.id,
-                    channel.id,
+                    channel,
                     message,
                     role,
                     rule

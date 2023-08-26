@@ -34,7 +34,7 @@ const setWelcome = (guild, channel, message, role, rules) => {
 
   return new Promise((resolve, reject) => {
     db.run('REPLACE INTO welcomes (guild, channel, message, role, rules) VALUES (?, ?, ?, ?, ?)',
-      [guild, channel, message, role, rules], 
+      [guild.id, channel.id, message, role.id, rules], 
       console.log("setwelcome"),
     (err) => {
       if (err) {
@@ -51,8 +51,8 @@ const setWelcome = (guild, channel, message, role, rules) => {
 const reset1 = (guild, channel, message, role, rules) => {
 
   return new Promise((resolve, reject) => {
-    db.run('DELETE FROM welcomes WHERE guild = ?', [guild]);
-    [guild, channel, message, role, rules],
+    db.run('DELETE FROM welcomes WHERE guild = ?', [guild.id]);
+    [guild.id, channel.is, message, role.id, rules],
     console.log("reset1"),
     (err) => {
     if (err) {
