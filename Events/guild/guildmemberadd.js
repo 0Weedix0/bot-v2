@@ -1,6 +1,7 @@
 const { SlashCommandBuilder, EmbedBuilder, AttachmentBuilder, Client } = require('discord.js')
 const Canvas = require('canvas')
-const sqlite3 = require('../../Models/Welcome');
+const data = require('../../Models/Welcome');
+// const { Sequelize } = require('sequelize');
 
 module.exports = {
     name: 'guildMemberAdd',
@@ -8,7 +9,7 @@ module.exports = {
     async execute(member, Client) {
        
        try {
-           const data = await sqlite3.getWelcome({
+           const data = await data.getWelcome({
                guild: interaction.guild.id
            })
            if (!data) {return console.log('pas de welcome present')}
@@ -70,11 +71,11 @@ module.exports = {
         }) // Sending Image As Attachment
 
         const channel = member.guild.channels.cache.get(data.Channel)
-        if (!channel) {return console.log('Channel not found');}
+        if (!channel) {return console.log('Channel non trouver');}
         let message = data.Message
         if (!message || message === null) message = `Welcome To ${member.guild.name}`
-        let rule = data.Rule
-        if (!rule || rule === null) rule = `#NotSetYet`
+        let rules = data.Rules
+        if (!rules || rules === null) rules = `#NotSetYet`
 
         const welcomeEmbed = new EmbedBuilder()
             .setColor('Random')
@@ -86,7 +87,7 @@ module.exports = {
             .setImage('attachment://welcome.png')
             .setDescription(`
         Welcome To **${member.guild.name}** <@${member.id}>
-        Make Sure To Check <#${rule}>
+        Make Sure To Check <#${rules}>
                 `)
         await channel.send({ content: `<@${member.id}>\n${message}`, embeds: [welcomeEmbed], files: [attachment] }) // Send Embed, Image And Mess
 

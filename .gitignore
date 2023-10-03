@@ -3,3 +3,7 @@ Snippets/config.json
 database
 welcomer.sqlite
 Snippets/config.json
+database.sqlite
+sqldiff.exe
+sqlite3_analyzer.exe
+sqlite3.exe
